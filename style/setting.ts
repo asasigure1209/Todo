@@ -1,0 +1,29 @@
+type Text = "bold" | "normal" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900"
+
+export const color = {
+    header: {
+        background: '#56CCF2',
+        text: '#FFFFFF',
+    },
+    todoInput: {
+        background: '#FFFFFF',
+        formBackgound: '#F2F2F2',
+        placeholder: '#8C8C8C',
+        formBoder: '#BDBDBD',
+    },
+    todo: {
+        text: '#565656',
+        background: '#FFFFFF',
+        border: '#F0F0F0'
+    },
+    background: '#F9F9F9'
+}
+
+export const text = {
+    header: {
+        fontWeight: 'bold' as Text,
+        fontSize: 18
+    },
+    fontWeight: 'normal' as Text,
+    fontSize: 14
+}
