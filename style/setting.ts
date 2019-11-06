@@ -14,7 +14,8 @@ export const color = {
     todo: {
         text: '#565656',
         background: '#FFFFFF',
-        border: '#F0F0F0'
+        border: '#F0F0F0',
+        underlay: '#BDBDBD'
     },
     background: '#F9F9F9'
 }

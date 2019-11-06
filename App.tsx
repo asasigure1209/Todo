@@ -1,10 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
+import Header from './components/Header';
+import { color } from './style/setting';
+import Todo from './components/Todo';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <StatusBar translucent={true} hidden={false}></StatusBar>
+      <View style={styles.statusBar}></View>
+      <Header></Header>
+      <Todo title="テストの問題を解く"></Todo>
+      <Todo title="片付け"></Todo>
+      <Todo title="食器を洗う"></Todo>
+      <Todo title="ご飯を作る"></Todo>
     </View>
   );
 }
@@ -12,8 +21,10 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: color.background
   },
+  statusBar: {
+    height: StatusBar.currentHeight,
+    color: '#FFFFFF'
+  }
 });
