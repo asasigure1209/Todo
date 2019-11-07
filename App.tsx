@@ -8,6 +8,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar translucent={true} hidden={false}></StatusBar>
+      {/* statusBarにかぶせる */}
       <View style={styles.statusBar}></View>
       <Header></Header>
       <Todo title="テストの問題を解く"></Todo>

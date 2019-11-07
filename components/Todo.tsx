@@ -6,13 +6,13 @@ export type Todo = {
     title: string
 }
 
-const onPress = () => {
-    console.log("press")
+const onPress = (title: string) => {
+    console.log(title)
 }
 
 export default function Todo(props: Todo) {
   return (
-    <TouchableHighlight onPress={onPress} underlayColor={color.todo.underlay}>
+    <TouchableHighlight onPress={()=>{onPress(props.title)}} underlayColor={color.todo.underlay}>
         <View style={styles.container}>
             <Text style={styles.text}>{props.title}</Text>
             <Image style={styles.image} source={require('./../assets/check.png')} />
