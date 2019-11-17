@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, View, TextInput } from 'react-native';
+import { StyleSheet, Image, View, TextInput, KeyboardAvoidingView } from 'react-native';
 import { color, text } from './../style/setting'
 
 export default function TodoInput() {
     const [text, setText] = useState("")
 
     return (
-        <View style={styles.container}>
-            <TextInput 
-                style={styles.input}
-                placeholder="新しいやること"
-                onChangeText={(text) => {setText(text)}}
-                value={text}
-            />
-            <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={require('./../assets/add.png')} />
+        <KeyboardAvoidingView behavior={'position'}>
+            <View style={styles.container}>
+                <TextInput 
+                    style={styles.input}
+                    placeholder="新しいやること"
+                    onChangeText={(text) => {setText(text)}}
+                    value={text}
+                />
+                <View style={styles.imageWrapper}>
+                    <Image style={styles.image} source={require('./../assets/add.png')} />
+                </View>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 
