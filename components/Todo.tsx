@@ -2,20 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { color, text } from './../style/setting'
 
-export type Todo = {
-    title: string
+export type TodoProps = {
+    title: string,
+    onClick: Function,
+    index: number
 }
 
-const onPress = (title: string) => {
-    console.log(title)
-}
-
-export default function Todo(props: Todo) {
+export default function Todo(props: TodoProps) {
   return (
-    <TouchableHighlight onPress={()=>{onPress(props.title)}} underlayColor={color.todo.underlay}>
+    <TouchableHighlight onPress={()=>{}} underlayColor={color.todo.underlay}>
         <View style={styles.container}>
-            <Text style={styles.text}>{props.title}</Text>
-            <Image style={styles.image} source={require('./../assets/check.png')} />
+            <Text style={styles.text} numberOfLines={1} ellipsizeMode={"tail"}>{props.title}</Text>
+            <View style={styles.imageWrapper} >
+              <TouchableHighlight onPress={() => props.onClick(props.index)} underlayColor={color.todo.background} activeOpacity={0.4}>
+                <Image style={styles.image} source={require('./../assets/check.png')} />
+              </TouchableHighlight>
+            </View>
         </View>
     </TouchableHighlight>
   );
@@ -26,17 +28,24 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: color.todo.background,
     justifyContent: 'space-between',
+    alignItems: 'center',
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: color.todo.border
+    borderBottomColor: color.todo.border,
+    flex: 1
   },
   text: {
       fontWeight: text.fontWeight,
       fontSize: text.fontSize,
       color: color.todo.text,
+      textAlignVertical: 'center',
+      flex: 1
+  },
+  imageWrapper: {
+    paddingLeft: 8
   },
   image: {
-      width: 24,
-      height: 24
+    width: text.fontSize + 10,
+    height: text.fontSize + 10,
   }
 });
