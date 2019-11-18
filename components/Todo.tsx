@@ -4,8 +4,8 @@ import { color, text } from './../style/setting'
 
 export type TodoProps = {
     title: string,
-    onClick: Function,
-    index: number
+    index: number,
+    onClick: Function
 }
 
 export default function Todo(props: TodoProps) {

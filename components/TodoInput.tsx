@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, View, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Image, View, TextInput, KeyboardAvoidingView, TouchableHighlight } from 'react-native';
 import { color, text } from './../style/setting'
 
-export default function TodoInput() {
+type TodoInputProps = {
+    onClick: Function
+}
+
+export default function TodoInput(props: TodoInputProps) {
     const [text, setText] = useState("")
 
     return (
@@ -15,7 +19,13 @@ export default function TodoInput() {
                     value={text}
                 />
                 <View style={styles.imageWrapper}>
-                    <Image style={styles.image} source={require('./../assets/add.png')} />
+                    <TouchableHighlight 
+                        onPress={() => { props.onClick(text); setText('') }}
+                        underlayColor={color.todoInput.background}
+                        activeOpacity={0.4}
+                    >
+                        <Image style={styles.image} source={require('./../assets/add.png')} />
+                    </TouchableHighlight>
                 </View>
             </View>
         </KeyboardAvoidingView>
