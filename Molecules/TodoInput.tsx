@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Image, View, TextInput, KeyboardAvoidingView, TouchableHighlight } from 'react-native';
-import { color, text } from './../style/setting'
+import { color, text } from '../style/setting'
 
 type TodoInputProps = {
     onClick: Function

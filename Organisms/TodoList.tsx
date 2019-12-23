@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
-import Todo, { TodoProps } from './Todo'
+import Todo, { TodoProps } from '../Molecules/Todo'
 
 type TodoListProps = {
     todoNames: string[],

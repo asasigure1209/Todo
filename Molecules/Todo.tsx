@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
-import { color, text } from './../style/setting'
+import { color, text } from '../style/setting'
 
 export type TodoProps = {
     title: string,
