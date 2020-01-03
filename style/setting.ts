@@ -25,6 +25,10 @@ export const text = {
         fontWeight: 'bold' as Text,
         fontSize: 18
     },
-    fontWeight: 'normal' as Text,
+    menu: {
+        fontWeight: 'normal' as Text,
+        fontSize: 14
+    },
+    fontWeight: '600' as Text,
     fontSize: 14
 }

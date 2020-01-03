@@ -10,7 +10,7 @@ export default function TodoInput(props: TodoInputProps) {
     const [text, setText] = useState("")
 
     return (
-        <KeyboardAvoidingView behavior={'position'}>
+        <KeyboardAvoidingView behavior={"position"}>
             <View style={styles.container}>
                 <TextInput 
                     style={styles.input}

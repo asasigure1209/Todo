@@ -1,22 +1,49 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { color, text } from '../style/setting'
+import { NavigationStackProp } from 'react-navigation-stack';
+import { TaskProps } from '../Pages/Home';
 
 export type TodoProps = {
-    title: string,
-    index: number,
-    onClick: Function
+    task: TaskProps,
+    completeTask: Function,
+    editTask: Function
+    navigation: NavigationStackProp
 }
 
 export default function Todo(props: TodoProps) {
     return (
-        <TouchableHighlight onPress={()=>{}} underlayColor={color.todo.underlay}>
+        <TouchableHighlight 
+            onPress={()=>  
+                props.navigation.navigate(
+                    'Description',
+                    { 
+                        task: props.task,
+                        editTask: props.editTask,
+                    }
+                ) 
+            } 
+            underlayColor={color.todo.underlay}
+        >
             <View style={styles.container}>
-                <Text style={styles.text} numberOfLines={1} ellipsizeMode={"tail"}>{props.title}</Text>
-                <View style={styles.imageWrapper} >
-                <TouchableHighlight onPress={() => props.onClick(props.index)} underlayColor={color.todo.background} activeOpacity={0.4}>
-                    <Image style={styles.image} source={require('./../assets/check.png')} />
-                </TouchableHighlight>
+                <Text
+                    style={styles.text}
+                    numberOfLines={1}
+                    ellipsizeMode={"tail"}
+                >
+                    {props.task.title}
+                </Text>
+                <View style={styles.imageWrapper}>
+                    <TouchableHighlight
+                        onPress={() => props.completeTask(props.task.order)}
+                        underlayColor={color.todo.background}
+                        activeOpacity={0.4}
+                    >
+                        <Image
+                            style={styles.image}
+                            source={require('./../assets/check.png')}
+                        />
+                    </TouchableHighlight>
                 </View>
             </View>
         </TouchableHighlight>

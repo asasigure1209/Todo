@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView } from 'react-native';
-import Todo, { TodoProps } from '../Molecules/Todo'
+import Todo from '../Molecules/Todo'
+import { NavigationStackProp } from 'react-navigation-stack';
+import { TaskProps } from '../Pages/Home';
 
 type TodoListProps = {
-    todoNames: string[],
-    onClick: Function
+    tasks: TaskProps[],
+    completeTask: Function,
+    editTask: Function,
+    navigation: NavigationStackProp
 }
 
 export default function TodoList(props: TodoListProps) {
-    const todoList = props.todoNames.map((todoName, index) => 
-        <Todo onClick={props.onClick} title={todoName} index={index} key={index}></Todo>
+    const tasks = props.tasks.sort((a, b) => {
+        let comparison = 0;
+
+        if (a.order > b.order) {
+            comparison = 1;
+        } else if (b.order > a.order) {
+            comparison = -1;
+        }
+
+        return comparison;
+    })
+
+    const todoList = tasks.map((task) => 
+        <Todo completeTask={props.completeTask} editTask={props.editTask} navigation={props.navigation} task={task} key={task.order}></Todo>
     )
 
     return (
