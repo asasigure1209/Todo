@@ -7,7 +7,7 @@ import { TaskProps } from '../Pages/Home';
 export type TodoProps = {
     task: TaskProps,
     completeTask: Function,
-    editTask: Function
+    editTask: Function,
     navigation: NavigationStackProp
 }
 
