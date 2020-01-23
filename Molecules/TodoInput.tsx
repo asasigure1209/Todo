@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, View, TextInput, KeyboardAvoidingView, TouchableHighlight } from 'react-native';
-import { color, text } from '../style/setting'
+import { StyleSheet, Image, View, TextInput, KeyboardAvoidingView, TouchableHighlight, StatusBar } from 'react-native';
+import { color, text } from '../style/setting';
+import { Header } from 'react-navigation-stack';
 
 type TodoInputProps = {
     onClick: Function
 }
 
+const KEYBOARD_VERTICAL_OFFSET = Header.HEIGHT + StatusBar.currentHeight
+
 export default function TodoInput(props: TodoInputProps) {
     const [text, setText] = useState("")
 
     return (
-        <KeyboardAvoidingView behavior={"position"}>
+        <KeyboardAvoidingView behavior={"padding"} keyboardVerticalOffset={KEYBOARD_VERTICAL_OFFSET}>
             <View style={styles.container}>
                 <TextInput 
                     style={styles.input}
