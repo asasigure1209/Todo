@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "todo",
-    "slug": "Todo",
+    "name": "シンプルなToDoリスト",
+    "slug": "simple-todo-list",
+    "owner": "asasigure",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -9,12 +10,14 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
+    "primaryColor": "#56CCF2",
     "icon": "./assets/icon.png",
-    "ios": {
-      "bundleIdentifier": "com.asasigure.todo"
-    },
     "android": {
       "package": "com.asasigure.todo",
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/icon.png"
+      },
       "permissions": [
         "READ_EXTERNAL_STORAGE"
       ]
