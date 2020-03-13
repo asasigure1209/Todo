@@ -2,10 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { color, text } from '../style/setting'
 import { NavigationStackProp } from 'react-navigation-stack';
-import { TaskProps } from '../Pages/Home';
+import { WebApiTaskProps } from '../Pages/Home';
 
 export type TodoProps = {
-    task: TaskProps,
+    task: WebApiTaskProps,
     completeTask: Function,
     editTask: Function,
     navigation: NavigationStackProp
@@ -35,7 +35,7 @@ export default function Todo(props: TodoProps) {
                 </Text>
                 <View style={styles.imageWrapper}>
                     <TouchableHighlight
-                        onPress={() => props.completeTask(props.task.order)}
+                        onPress={() => props.completeTask(props.task.id)}
                         underlayColor={color.todo.background}
                         activeOpacity={0.4}
                     >

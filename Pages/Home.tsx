@@ -4,104 +4,67 @@ import TodoList from '../Organisms/TodoList';
 import TodoInput from '../Molecules/TodoInput';
 import { color } from '../style/setting';
 import { NavigationStackProp } from 'react-navigation-stack';
+import axios from 'axios'
 
 type Props = {
     navigation: NavigationStackProp
 }
 
-export type TaskProps = {
+export type WebApiTaskProps = {
+    id: number,
     order: number,
     title: string,
     description: string,
+    created_at: string,
+    update_at: string,
 }
 
 export default function Home(props: Props) {
-    const [tasks, setTasks] = useState<TaskProps[]>([])
+    const [tasks, setTasks] = useState<WebApiTaskProps[]>([])
     useEffect (() => {
-        async function getLocalData() {
-            let items: [string, string][];
-            try {
-                const allKeys = await AsyncStorage.getAllKeys()
-                items = await AsyncStorage.multiGet(allKeys)
-            } catch(error) {
-                console.log(error)
-            }
-
-            let localTask: TaskProps[];
-            if (items !== undefined) {
-                localTask = items.map((item) => {
-                    return JSON.parse(item[1])
-                })
-            }
-            setTasks(localTask)
-        }
-
-        getLocalData()
+        // WebApiからの取得
+        axios.get('https://asasigure-todo.herokuapp.com/api/tasks')
+            .then(response => {
+                setTasks(response.data);
+            })
     },[])
 
-    const completeTask = (deleteOrder: number) => {
-        try {
-            AsyncStorage.removeItem(deleteOrder.toString())
-        } catch(error) {
-            console.log(error)
-        }
-
-        setTasks(tasks.filter((todo) => todo.order !== deleteOrder))
+    const completeTask = (deleteId: number) => {
+        //WebApiでのタスク削除
+        axios.delete('https://asasigure-todo.herokuapp.com/api/tasks/' + deleteId.toString())
+            .then(response => setTasks(response.data))
     }
 
     const cleateTask = (title: string) => {
-        if (title !== "") {
-            let order = 0;
-
-            if (tasks.length > 0) {
-                //降順にソート
-                const sortedTasks = tasks.sort((a, b) => {
-                    let comparison = 0;
-            
-                    if (a.order > b.order) {
-                        comparison = -1;
-                    } else if (b.order > a.order) {
-                        comparison = 1;
-                    }
-            
-                    return comparison;
-                })   
-
-                order = sortedTasks[0].order + 1
-            }
-
-            const newTask: TaskProps = {
-                order,
-                title,
-                description: "",
-            }
-
-            try {
-                AsyncStorage.setItem(tasks.length.toString(), JSON.stringify(newTask))
-            } catch (error) {
-                console.log(error)
-            }
-
-            setTasks(tasks.concat(newTask))
-        }
+        //WebApiでのタスク作成
+        axios.post('https://asasigure-todo.herokuapp.com/api/tasks', {
+            title,
+            description: "",
+        }).then(response => setTasks(tasks.concat(response.data)))
     }
 
-    const editTask = (newTask: TaskProps) => {
+    const editTask = (newTask: WebApiTaskProps) => {
         try {
-            AsyncStorage.mergeItem(newTask.order.toString(), JSON.stringify(newTask))
+            AsyncStorage.mergeItem(newTask.id.toString(), JSON.stringify(newTask))
         } catch(error) {
             console.log(error)
         }
 
-        const newTasks = tasks.map((preTask) => {
-            if (preTask.order === newTask.order) {
-                return newTask
-            }
-
-            return preTask
+        //WebApiでのタスク更新
+        axios.put('https://asasigure-todo.herokuapp.com/api/tasks/' + newTask.id.toString(), {
+            title: newTask.title,
+            description: newTask.description,
+        }).then(response => {
+            const newTasks = tasks.map((preTask) => {
+                if (preTask.id === response.data.id) {
+                    return response.data
+                }
+    
+                return preTask
+            })
+    
+            setTasks(newTasks)
         })
-
-        setTasks(newTasks)
     }
 
     return (
