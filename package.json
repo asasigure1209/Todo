@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/react-native-sortable-list": "0.0.8",
+    "axios": "^0.19.2",
     "expo": "^35.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",

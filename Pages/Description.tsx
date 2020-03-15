@@ -3,14 +3,14 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { color, text } from '../style/setting';
 import { TextInput } from 'react-native-gesture-handler';
 import { NavigationStackProp } from 'react-navigation-stack';
-import { TaskProps } from './Home';
+import { WebApiTaskProps } from './Home';
 
 type Props = {
     navigation: NavigationStackProp
 }
 
 export default function Description(props: Props) {
-    const [task, setTask] = useState<TaskProps>(props.navigation.getParam('task'))
+    const [task, setTask] = useState<WebApiTaskProps>(props.navigation.getParam('task'))
 
     useEffect(() => {
         props.navigation.setParams({
@@ -27,14 +27,17 @@ export default function Description(props: Props) {
                 placeholder="やること"
                 style={styles.titleInput}
                 value={task.title}
-                onChangeText={value => setTask({ title: value, description: task.description, order: task.order })}
+                onChangeText={value => {
+                        setTask({...task, title: value})
+                    }
+                }
             />
             <TextInput
                 placeholder="詳細"
                 multiline
                 style={styles.descriptionInput}
                 value={task.description}
-                onChangeText={value => setTask({ title: task.title, description: value, order: task.order })}
+                onChangeText={value => setTask({...task, description: value})}
             />
         </View>
     );
